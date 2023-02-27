@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Runtime;
 
-public class Enemy : MonoBehaviour
+
+//The only difference between this script and Enemy is in OnCollisionEnter2d where we change the fact that the BorderCollision script is Not on a parent but on This object.
+
+
+public class BossEnemy : MonoBehaviour
 {
     [SerializeField] float fireRate = 5;
     [SerializeField] GameObject BadBullet;
@@ -27,9 +29,9 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Border"))
-        {
-            transform.parent.GetComponent<SwarmMovement>().BorderCollision();
+        if (collider.gameObject.CompareTag("Border")) 
+        { 
+            GetComponent<SwarmMovement>().BorderCollision();
         }
     }
 }

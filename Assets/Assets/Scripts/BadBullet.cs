@@ -5,7 +5,6 @@ using UnityEngine;
 public class BadBullet : MonoBehaviour
 {
     [SerializeField] float speed = -1;
-
     void Update()
     {
         transform.position += Vector3.up * speed * Time.deltaTime;

@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class SwarmMovement : MonoBehaviour
 {
-    [SerializeField] float xSpeed = 1f;
+    [SerializeField] public float xSpeed = 1f;
+    [SerializeField] float xAccel = 1f;
     [SerializeField] float ySpeed = 1f;
     
     // Update is called once per frame
@@ -20,6 +21,10 @@ public class SwarmMovement : MonoBehaviour
     private static void ProcessDeath(GameObject ourGameObject)
     {
         if (ourGameObject.transform.childCount <= 0)
+        {
+            Destroy(ourGameObject);
+        }
+        if (ourGameObject.transform.position.y <= -20|| ourGameObject.transform.position.x <= -20|| ourGameObject.transform.position.x >= 20)
         {
             Destroy(ourGameObject);
         }
@@ -37,10 +42,15 @@ public class SwarmMovement : MonoBehaviour
         }
     }
 
-    public void BorderCollision(Enemy enemy)
+    public void BorderCollision()
     {
-        Debug.unityLogger.Log("COLLSION");
-        xSpeed += 0.5f;
+        if (xSpeed > 0)
+        {
+            xSpeed += xAccel;
+        }else
+        {
+            xSpeed -= xAccel;
+        }
         xSpeed = -xSpeed;
         transform.Translate(0, -ySpeed, 0);
     }
